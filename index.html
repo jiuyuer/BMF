@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>样式框架</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/tabcms.css">
+    <script src="js/tabcms.js"></script>
+</head>
+<body>
+<div class="m-header">
+    <h4 class="logo"><img src="images/common/logo_min.png"></h4>
+    <ul class="link">
+        <li class="user"><a href="http://www.webcjs.com"><img src="images/common/pic.png"></a>
+            <p><a href="http://www.webcjs.com">方人也</a></p>
+        </li>
+        <li class="syst"><a href="javascript:">系统管理</a></li>
+        <li class="flow"><a href="javascript:">业务流程</a></li>
+        <li class="help"><a href="javascript:">新手向导</a></li>
+        <li class="exit"><a href="javascript:">退出</a></li>
+    </ul>
+</div>
+<div class="m-container f-clearfix">
+    <div class="m-main">
+        <div class="m-tabList">
+            <div id="tabLeft" class="m-tab-left"></div>
+            <div id="tabRight" class="m-tab-right"></div>
+            <div class="m-tab-list">
+                <ul id="tabList">
+                    <li id="0list" class="on"><a href="javascript:">首页</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="m-tabCon" id="tabCon">
+            <div id="0Con" class="m-tab-content">
+                <div class="m-detail-con f-clearfix">
+                    <div style="height:900px;">内容，测试</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var menuData = [{
+            text: '样式',
+            items: [
+                {id: 'tabsMethod', text: 'artTabs框架', href: 'demoPage/artTabs.html'},
+                {id: 'basic_styles', text: '基本样式调用', href: 'demoPage/basic_styles.html'},
+                {id: 'dialog', text: '弹出提示信息', href: 'demoPage/dialog.html'},
+                {id: 'header', text: '头部样式', href: 'demoPage/header.html'},
+                {id: 'test2', text: '测试页面二', href: 'demoPage/test2.html'}
+            ]
+        }, {
+            text: '元素',
+            items: [
+                {id: 'zTree', text: 'zTree树形结构', href: 'demoPage/zTree.html'},
+                {id: 'jqGrid', text: 'jqGrid表格控件', href: 'demoPage/jqGrid.html'},
+                {id: 'test3', text: '测试页面三', href: 'demoPage/test3.html'},
+                {id: 'test4', text: '省市区选择', href: 'demoPage/citySelect.html'},
+                {id: 'test5', text: '搜索控件', href: 'demoPage/search.html'},
+                {id: 'test6', text: 'bootstrap_table', href: 'demoPage/table_bootstrap.html'}
+            ]
+        }, {
+            text: '插件',
+            items: [
+                {id: 'My97', text: 'My97日期选择', href: 'demoPage/My97-API.html'},
+                {id: 'moment', text: 'moment插件', href: 'demoPage/moment.html'}
+
+            ]
+        }, {
+            text: '规范',
+            items: [
+                {id: 'Standard', text: 'css规范文档', href: 'demoPage/CSS-standard.html'},
+                {id: 'H-Standard', text: 'html规范文档', href: 'demoPage/HTML-standard.html'}
+            ]
+        }
+        ];
+
+        //调用
+        $.artTabs({
+            menu: menuData
+        })
+    });
+</script>
+</body>
+</html>
