@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>artTabs框架</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/demo.css">
+    <script src="../js/jquery-1.8.3.min.js"></script>
+    <script src="js/tabcms.js"></script>
+    <script>
+        $(function () {
+            $('#button').artTabs({
+                addTab: {
+                    items: {
+                        id: 'test4',
+                        title: '测试页面四',
+                        url: '/demoPage/test4.html'
+                    }
+                },
+                isRefresh: true
+            })
+
+
+            $('#button2').artTabs({
+                toTab: {id: "test4"},
+                isRefresh: true
+            })
+
+            $('#button3').artTabs({
+                closeTab: true
+            })
+
+            $('#button4').artTabs({
+                isRefresh: true
+            })
+
+        })
+    </script>
+</head>
+
+<body>
+<div class="demo-con">
+    <h2>artTabs 配置参数演示</h2>
+    <h4>1. 菜单配置</h4>
+    <p>调用此方法之后，完成如下几点功能：</p>
+    <ul>
+        <li>1). 选择导航效果的绑定</li>
+        <li>2). 绑定menu上的菜单新增功能</li>
+        <li>3). 绑定tab上list的切换</li>
+        <li>4). 绑定tab上list里面a标签的关闭</li>
+        <li>5). 高度自适应(主要是iframe的外围)</li>
+        <li>6). 左右键tab切换</li>
+        <li>7). 绑定tab上list的右键菜单及功能</li>
+    </ul>
+    <pre class="brush: js;">
+        var menuData = [{
+                text : '样式说明',
+                items : [
+                    {id:'tabsMethod',text:'tab调用方法说明',href:'demoPage/tabs.html'},
+                    {id:'test2',text:'测试页面二',href:'demoPage/test2.html'}
+                ]
+                },{
+                text : '测试',
+                items : [
+                    {id:'test3',text:'测试页面三',href:'demoPage/test3.html'}
+                ]
+                }
+        ]
+        
+        /*调用*/
+        $.artTabs({
+            menu : menuData
+        })
+    </pre>
+    <h4>2. 关闭当前tab页</h4>
+    <p><span class="blue">closeTab</span>，默认参数为 false<br>
+        调用此方法后，内容页面展示的是当前关闭窗口的前一个tab页面
+    </p>
+    <p class="buttons">
+        <button id="button3">运行»</button>
+    </p>
+    <pre class="brush: js;">
+        $.artTabs({
+            closeTab : true
+        })
+    </pre>
+    <h4>3. 刷新当前tab页</h4>
+    <p><span class="blue">isRefresh</span>，默认参数为 false<br>
+        调用此方法后，会刷新当前窗口<br><br>
+        tip：<span class="red">1. 配合修改（或新增），跳转功能来调用居多<br>        
+        2. 很少单独调用此方法，在list的右键上已绑定此功能。</span>
+    </p>
+    <p class="buttons">
+        <button id="button4">运行»</button>
+    </p>
+    <pre class="brush: js;">
+        $.artTabs({
+            isRefresh : true
+        })
+    </pre>
+
+    <h4>4. 新增（或修改）tab页</h4>
+    <p>
+        调用方法：<span class="blue">addTab</span><br>以一个对象字面量<span class="blue">items</span>的形式传入对应的参数，包括<span class="blue"> id，title，url</span>
+        <br><br>
+        tip：<span class="red">1. 如果新增的窗口已打开，那么，将直接跳转到相应的窗口并显示</span>
+        <span class="red">2. 如果是修改方法（在表格修改中比较多），一般是跳转并刷新跳转的页面</span>
+    </p>
+    <p class="buttons">
+        <button id="button">运行»</button>
+    </p>
+    <pre class="brush: js;">
+        $('#button').artTabs({
+            addTab: {
+                    items: {
+                            id: 'test4',
+                            title: '测试页面四',
+                            url: '/demoPage/test4.html'
+                    }
+            }
+            //isRefresh : true
+        })
+    </pre>
+    <h4>5. 跳转到对应tab页</h4>
+    <p>调用方法：<span class="blue">toTab</span><br>传入对象id，此id为跳转到对应窗口的id值<br><br>
+        tip：
+        <span class="red">如果想要跳转的页面不存在（id值存在），那么就会弹出提示并返回</span>
+    </p>
+    <p class="buttons">
+        <button id="button2">运行»</button>
+    </p>
+    <pre class="brush: js;">
+    	$('#button2').artTabs({
+            toTab: {id : "test2"},
+            //closeTab: true,
+            isRefresh: true
+        })
+    </pre>
+</div>
+<!--代码高亮显示-->
+<script src="../js/elem/lh/scripts/shCore.js" type="text/javascript"></script>
+<script src="../js/elem/lh/scripts/shBrushJScript.js" type="text/javascript"></script>
+<script src="../js/elem/lh/scripts/shBrushXml.js" type="text/javascript"></script>
+<script src="../js/elem/lh/scripts/shBrushCss.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../js/elem/lh/styles/shCoreDjango.css">
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<!--end-->
+</body>
+</html>
