@@ -1,9 +1,6 @@
 .DS_Store
+bmfweb/
 node_modules/
 dist/
 package-lock.json
 .idea/
-.idea/BMF.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/workspace.xml
