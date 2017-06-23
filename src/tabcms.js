@@ -5,7 +5,7 @@ import '../css/tabcms.css';
         config = $.extend(true, {}, artTabs.defaults, config);
         config.$tabList = $('#' + config.id, top.document).find('div.m-tab-list');
         config.$tabCon = $('#' + config.id, top.document).find('div.m-tabCon');
-        config.height = parseInt($('.m-container').css('paddingTop')) + $('.m-tab-list').height();
+        config.height = parseInt($('.m-container').css('paddingTop')) + config.$tabList.height();
         return new artTabs.fn._init(config);
     };
     artTabs.idArray = [];
@@ -21,8 +21,7 @@ import '../css/tabcms.css';
                         that._refreshIframe(config.addTab.items);
                     }
                 } else if (config.toTab) {     //iframe中跳转指定Id的tab页
-                    that._toIframe(config.toTab.id);
-                    if (config.isRefresh) {
+                    if (that._toIframe(config.toTab.id) && config.isRefresh) {
                         that._refreshIframe(config.toTab.id);
                     }
                 } else if (config.closeTab) {      //iframe中纯粹关闭当前页，默认跳转到上一页
@@ -40,41 +39,63 @@ import '../css/tabcms.css';
                 that._nextPrev();			//左右切换
                 that._getRighthand();		//绑定li的右键菜单
                 that._resize();				//高度自适应
+                that._navbar();             //菜单收缩
+                that._navMain();            //一级菜单
             }
             return that;
         },
-
+        _navMain: function () {
+            $(document).off('click.navMain').on('click.navMain', '.m-nav-main li', function () {
+                var index = $(this).index();
+                $('.m-container').children('div.m-nav-sub').eq(index).show().siblings('div.m-nav-sub').hide();
+                $(this).addClass('on').siblings().removeClass('on');
+            });
+        },
+        _navbar: function () {
+            $(document).off('click.navbar').on('click.navbar', '.m-nav-tit a.m-navbar', function () {
+                $(this).closest('.m-container').toggleClass('m-navbar-hide');
+            });
+        },
         _getMenu: function (config) {
             var data = config.data;
-            var _wrap = $('<div id="' + config.id + 'Nav" class="m-nav-sub"></div>');
-            var _menu = $('<h4>菜单</h4>');
-            var _ul = $('<ul class="thin-scroll"></ul>');
-            $(data).each(function (i) {
+            var _nav = '';
+            var _navLi = '';
+            $(data).each(function (k) {
+                var className = k == 0 ? 'on' : '';
+                var _navSub = '';
+                var _menu = '<div class="m-nav-tit"><h4>' + data[k].title + '</h4><a title="' + data[k].title + '" href="javascript:" class="m-navbar"></a></div>';
+                _navLi += '<li class="'+ className +'" id="' + data[k].id + '"><a href="javascript:">' + data[k].title + '</a></li>';
+
                 var _creatLi = '';
-                if (data[i].url) {
-                    _creatLi = $('<li><a id="' + data[i].id + '" href="' + data[i].url + '"><span>' + data[i].title + '</span></a></li>');
-                } else {
-                    _creatLi = $('<li><a href="javascript:"><span>' + data[i].title + '</span></a></li>');
-                }
-                var _subUl = $('<ul class="m-sub-ul"></ul>');
-                var _subLi = '';
-                $(data[i].items).each(function (j) {
-                    _subLi += '<li><a id="' + data[i].items[j].id + '" href="' + data[i].items[j].url + '"><span>' + data[i].items[j].title + '</span></a></li>';
+                $(data[k].items).each(function (i) {
+                    var _creatSubUl = '';
+                    var _creatSubLi = '';
+                    if (data[k].items[i].id) {
+                        _creatLi += '<li><a id="' + data[k].items[i].id + '" href="' + data[k].items[i].url + '"><span>' + data[k].items[i].title + '</span></a></li>';
+                    } else {
+                        $(data[k].items[i].items).each(function (j) {
+                            _creatSubLi += '<li><a id="' + data[k].items[i].items[j].id + '" href="' + data[k].items[i].items[j].url + '"><span>' + data[k].items[i].items[j].title + '</span></a></li>';
+                        });
+                        _creatSubUl = '<ul class="m-sub-ul">' + _creatSubLi + '</ul>'
+                        _creatLi += '<li><a href="javascript:"><span>' + data[k].items[i].title + '</span></a>' + _creatSubUl + '</li>';
+                    }
+                    _navSub = '<div class="m-nav-sub">' + _menu + '<ul class="thin-scroll">' + _creatLi + '</ul></div>'
                 });
-                _subUl.append(_subLi);
-                _creatLi.append(_subUl);
-                _ul.append(_creatLi);
+                $('#' + config.id).before(_navSub);
             });
-            _wrap.append(_menu);
-            _wrap.append(_ul);
-            $('#' + config.id).before(_wrap);
-            $('#' + config.id + 'Nav', top.document).children('ul').css({'overflow-y': 'auto'}).height($(window).height() - parseInt($('.m-container').css('paddingTop')) - _menu.outerHeight(true));
-            $('#' + config.id, top.document).find('div.m-tabCon').children('div').eq(0).css({'overflow': 'auto'}).height($(window).height() - config.height);
+            _nav = '<div class="m-nav-main"><ul>' + _navLi + '</ul></div>';
+            $('#' + config.id, top.document).closest('div.m-container').before(_nav);
+
+            var _navSub = $('#' + config.id, top.document).closest('div.m-container').find('div.m-nav-sub');
+            var _height = $(window).height() - parseInt($('.m-container').css('paddingTop')) - _navSub.children('div.m-nav-tit').outerHeight(true);
+            _navSub.eq(0).show();
+            _navSub.children('ul.thin-scroll').height(_height);
+            config.$tabCon.children('div').eq(0).css({'overflow': 'auto'}).height($(window).height() - config.height);
             return this;
         },
         _menuOperate: function (config) {
             var that = this;
-            var _li = $('#' + config.id + 'Nav').find('li');
+            var _li = $('#' + config.id, top.document).closest('div.m-container').find('div.m-nav-sub').find('li');
 
             //导航效果
             if (_li.has('ul')) {
@@ -111,12 +132,13 @@ import '../css/tabcms.css';
             _iframe += '<div id="' + itemData.id + 'Con" style="height:' + itemData.height + 'px;" class="m-tab-content">' +
                 '<iframe scrolling="auto" src="' + itemData.url + '" frameborder="0" class="m-frameCon"></iframe>' +
                 '</div>';
-            $('#' + that.config.id, top.document).find('div.m-tabCon').append(_iframe);
+
+            that.config.$tabCon.append(_iframe);
             _li += '<li id="' + itemData.id + 'list">' +
                 '<span>' + itemData.title + '</span>' +
                 '<a href="javascript:" class="m-tab-close"></a>' +
                 '</li>';
-            $('#' + that.config.id, top.document).find('div.m-tab-list').children('ul').append(_li);
+            that.config.$tabList.children('ul').append(_li);
             return that;
         },
         _closeBox: function () {
@@ -157,10 +179,10 @@ import '../css/tabcms.css';
                 var _win = $(window).height();
                 var _divHeight = _win - that.config.height;
                 var _pt = parseInt($('.m-container').css('paddingTop'));
-                var _navTitle = $('#' + that.config.id + 'Nav', top.document).children('h4').outerHeight(true);
+                var _navTitle = $('#' + that.config.id, top.document).closest('div.m-container').find('div.m-nav-sub').children('div.m-nav-tit').outerHeight(true);
                 var _navHeight = _win - _pt - _navTitle;
-                $('#' + that.config.id + 'Nav', top.document).children('ul').css({'overflow-y': 'auto'}).height(_navHeight);
-                $('#' + that.config.id, top.document).find('div.m-tabCon').children('div').height(_divHeight);
+                $('#' + that.config.id, top.document).closest('div.m-container').find('div.m-nav-sub').children('ul.thin-scroll').height(_navHeight);
+                that.config.$tabCon.children('div').height(_divHeight);
             });
             return that;
         },
@@ -323,8 +345,8 @@ import '../css/tabcms.css';
                 return false;
             } else {
                 that._showTab(tabId);
+                return true;
             }
-            return that;
         },
         _closeIframe: function (tabId) {
             var that = this;
@@ -336,12 +358,14 @@ import '../css/tabcms.css';
 
         _showTab: function (tabId) {
             var that = this;
+            $('.m-nav-sub').find('li').removeClass('active');
             if (tabId) {
+                $('#' + tabId).closest('li').addClass('active');
                 $('#' + tabId + 'list', top.document).addClass('on').siblings().removeClass('on');
                 $('#' + tabId + 'Con', top.document).show().siblings('div').hide();
             } else {
-                $('#' + that.config.id, top.document).find('div.m-tab-list').children('ul').children('li:first').addClass('on').siblings().removeClass('on');
-                $('#' + that.config.id, top.document).find('div.m-tabCon').children('div:first').show().siblings().hide();
+                that.config.$tabList.children('ul').children('li:first').addClass('on').siblings().removeClass('on');
+                that.config.$tabCon.children('div:first').show().siblings().hide();
             }
             return that;
         },
@@ -358,7 +382,7 @@ import '../css/tabcms.css';
 
 
         _refreshIframe: function (itemData) {
-            if (itemData.id) {
+            if (typeof itemData === 'object') {
                 $('#' + itemData.id + 'Con', top.document).find(".m-frameCon")[0].contentWindow.location.href = itemData.url;
             } else {
                 $('#' + itemData + 'Con', top.document).find(".m-frameCon")[0].contentWindow.location.reload();

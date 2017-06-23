@@ -3,25 +3,24 @@
 <head>
     <meta charset="utf-8">
     <title>样式框架</title>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/tabcms.css">
     <script src="js/tabcms.js"></script>
 </head>
 <body>
 <div class="m-header">
-    <a href="/" class="logo"><!--<img src="images/common/logo_min.png">--></a>
+    <a href="/" class="logo"><img src="images/common/logo.png"><b>FOF投资管理与分析系统</b></a>
     <ul class="link">
-        <li class="user"><a href="http://www.webcjs.com"><!--<img src="images/common/pic.png">--></a>
-            <p><!--<a href="http://www.webcjs.com">方人也</a>-->当前用户：<b>TANK</b>&nbsp;&nbsp;2017年6月18日 19：24</p>
+        <li class="user">
+            <p>当前用户：<b>TANK</b>&nbsp;&nbsp;2017年6月18日 19:24</p>
         </li>
-        <li class="syst"><a href="javascript:"><!--系统管理--></a></li>
-        <li class="flow"><a href="javascript:"><!--业务流程--></a></li>
-        <li class="help"><a href="javascript:"><!--新手向导--></a></li>
-        <li class="exit"><a href="javascript:"><!--退出--></a></li>
+        <li class="oper"><a title="" href="javascript:"></a></li>
+        <li class="syst"><a title="" href="javascript:"></a></li>
+        <li class="flow"><a title="" href="javascript:"></a></li>
+        <li class="lock"><a title="" href="javascript:"></a></li>
+        <li class="exit"><a title="退出" href="javascript:"></a></li>
     </ul>
 </div>
-<div class="m-nav-main"></div>
 <div class="m-container">
     <div class="m-main" id="tabCms">
         <div class="m-tabList">
@@ -44,21 +43,71 @@
     $(function () {
         var menuData = [
             {
-                title: '系统设置',
-                id:'system',
-                url:'demoPage/system.html'
+                id:'systemMain',
+                title: '系统管理',
+                items: [
+                    {
+                        id: 'system',
+                        title: '系统设置',
+                        url: 'demoPage/system.html'
+                    },
+                    {
+                        title: 'aaa',
+                        items: [
+                            {
+                                id: 'tabsMethod',
+                                title: 'tabcms文档',
+                                url: 'dos.html'
+                            },
+                            {
+                                id: 'tabsbbb',
+                                title: 'asssddd',
+                                url: 'dos.html'
+                            }
+
+                        ]
+                    }
+                ]
             },
             {
-                title: '文档',
-                items: [
-                    {id: 'tabsMethod', title: 'tabcms文档', url: 'dos.html'}
-                ]
+                id:'yewuMain',
+                title: '业务流程',
+                items: [{
+                    id: 'yewu',
+                    title: '业务设置',
+                    url: 'demoPage/system.html'
+                },
+                    {
+                        title: 'bbb',
+                        items: [{
+                            id: 'yewudoc',
+                            title: 'tabcms文档',
+                            url: 'dos.html'
+                        }]
+                    }]
+            },
+            {
+                id:'jijingMain',
+                title: '基金评级',
+                items: [{
+                    id: 'jijing',
+                    title: '基金设置',
+                    url: 'demoPage/system.html'
+                },
+                    {
+                        title: 'bbsssb',
+                        items: [{
+                            id: 'yedddwudoc',
+                            title: 'tabcms文档',
+                            url: 'dos.html'
+                        }]
+                    }]
             }
         ];
 
         //调用
         var d = $.artTabs({
-            id:'tabCms',
+            id: 'tabCms',
             data: menuData
         });
     });
