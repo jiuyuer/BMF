@@ -73,6 +73,7 @@ a:hover, a:focus {
 }
 
 .m-header a.logo img {
+    border:none;
     margin-right: 10px;
     vertical-align: middle;
 }
@@ -267,6 +268,7 @@ a:hover, a:focus {
 
 .m-nav-sub ul li.active a {
     width: 240px;
+    *width: auto;
     color: #1e2125;
     background: #fff;
 }
@@ -422,6 +424,8 @@ a:hover, a:focus {
 
 .m-tab-close:hover {
     border: 1px solid #d8d8d8;
+    *width:14px;
+    *height:14px;
 }
 
 .m-tab-list ul li.on, .m-tab-list ul li:hover {
@@ -448,12 +452,10 @@ a:hover, a:focus {
     height: 102px;
     position: absolute;
     padding: 2px;
-    border-width: 1px;
-    border-style: solid;
     overflow: hidden;
     background-color: #ffffff;
-    border-color: #ddd;
     color: #444;
+    border:1px solid #ddd;
 }
 
 .menu-line {
@@ -474,9 +476,7 @@ a:hover, a:focus {
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
-    border-width: 1px;
-    border-style: solid;
-    border-color: transparent;
+    border:1px solid transparent;
 }
 
 .menu-text {
