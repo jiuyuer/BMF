@@ -43,26 +43,26 @@
     $(function () {
         var menuData = [
             {
-                id:'systemMain',
-                title: '系统管理',
+                id:'nav0',
+                title: '导航一',
                 items: [
                     {
-                        id: 'system',
-                        title: '系统设置',
-                        url: 'demoPage/system.html'
+                        id: 'docTip',
+                        title: '文档',
+                        url: 'dos.html'
                     },
                     {
-                        title: 'aaa',
+                        title: '二级导航',
                         items: [
                             {
-                                id: 'tabsMethod',
-                                title: 'tabcms文档',
-                                url: 'dos.html'
+                                id: 'test0',
+                                title: '测试页面一',
+                                url: 'test/test1.html'
                             },
                             {
-                                id: 'tabsbbb',
-                                title: 'asssddd',
-                                url: 'dos.html'
+                                id: 'test1',
+                                title: '测试页面二',
+                                url: 'test/test2.html'
                             }
 
                         ]
@@ -70,36 +70,38 @@
                 ]
             },
             {
-                id:'yewuMain',
-                title: '业务流程',
-                items: [{
-                    id: 'yewu',
-                    title: '业务设置',
-                    url: 'demoPage/system.html'
-                },
+                id:'nav1',
+                title: '导航二',
+                items: [
                     {
-                        title: 'bbb',
+                        id: 'test2',
+                        title: '测试页面三',
+                        url: 'test/test3.html'
+                    },
+                    {
+                        title: '二级导航',
                         items: [{
-                            id: 'yewudoc',
-                            title: 'tabcms文档',
-                            url: 'dos.html'
+                            id: 'test3',
+                            title: '测试页面四',
+                            url: 'test/test4.html'
                         }]
                     }]
             },
             {
-                id:'jijingMain',
-                title: '基金评级',
-                items: [{
-                    id: 'jijing',
-                    title: '基金设置',
-                    url: 'demoPage/system.html'
-                },
+                id:'nav2',
+                title: '导航三',
+                items: [
                     {
-                        title: 'bbsssb',
+                        id: 'test4',
+                        title: '测试页面五',
+                        url: 'test/test5.html'
+                    },
+                    {
+                        title: '二级导航',
                         items: [{
-                            id: 'yedddwudoc',
-                            title: 'tabcms文档',
-                            url: 'dos.html'
+                            id: 'test5',
+                            title: '测试页面六',
+                            url: 'test/test6.html'
                         }]
                     }]
             }
@@ -111,7 +113,6 @@
             data: menuData
         });
     });
-
 </script>
 </body>
 </html>
