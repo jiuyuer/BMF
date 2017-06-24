@@ -1,6 +1,6 @@
 .DS_Store
-bmfweb/
 node_modules/
 dist/
 package-lock.json
 .idea/
+js/

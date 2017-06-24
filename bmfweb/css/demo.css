@@ -1,0 +1,102 @@
+body {
+    background: #fcfcfc;
+}
+
+.demo-con {
+    width: 50em;
+    margin: 40px 90px 60px;
+    padding: 15px;
+    border-radius: 10px;
+    border: solid #f5f5f5 1px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+    background: #fff;
+    min-height: 640px;
+}
+
+.demo-con h2 {
+    clear: both;
+    font-size: 1.4em;
+    height: 2em;
+    margin-bottom: 10px;
+    line-height: 2em;
+    text-align: center;
+    color: #FFF;
+    background: #64B557;
+    font-weight: bold;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.demo-con h4 {
+    color: #000;
+    font-size: 16px;
+}
+
+.demo-con h5 {
+    color: #333;
+}
+
+.demo-con p {
+    padding: 10px 0;
+}
+
+.demo-con p.buttons {
+    text-align: right;
+    padding: 0;
+}
+
+.demo-con button {
+    font-size: 12px;
+    padding: 2px 8px;
+    background-color: #F8F8F8;
+    border: solid 1px #CCC;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.demo-con button:hover {
+    background: #F5F5F5;
+}
+
+.demo-con span.blue {
+    color: #03F;
+    margin: 0 2px;
+}
+
+.demo-con span.red {
+    color: #F00;
+    display: block;
+}
+
+.demo-con > ul {
+    padding-left: 15px;
+}
+
+.demo-con > ul > li {
+    list-style: none;
+    margin-bottom: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

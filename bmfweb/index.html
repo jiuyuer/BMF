@@ -1,0 +1,119 @@
+<!doctype html>
+<html style="overflow: hidden;">
+<head>
+    <meta charset="utf-8">
+    <title>样式框架</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/tabcms.css">
+    <script src="js/tabcms.js"></script>
+</head>
+<body>
+<div class="m-header">
+    <a href="/" class="logo"><img src="images/common/logo.png"><b>FOF投资管理与分析系统</b></a>
+    <ul class="link">
+        <li class="user">
+            <p>当前用户：<b>TANK</b>&nbsp;&nbsp;2017年6月18日 19:24</p>
+        </li>
+        <li class="oper"><a title="" href="javascript:"></a></li>
+        <li class="syst"><a title="" href="javascript:"></a></li>
+        <li class="flow"><a title="" href="javascript:"></a></li>
+        <li class="lock"><a title="" href="javascript:"></a></li>
+        <li class="exit"><a title="退出" href="javascript:"></a></li>
+    </ul>
+</div>
+<div class="m-container">
+    <div class="m-main" id="tabCms">
+        <div class="m-tabList">
+            <div class="m-tab-list">
+                <ul>
+                    <li class="on"><a href="javascript:">首页</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="m-tabCon">
+            <div class="m-tab-content">
+                <div class="m-detail-con">
+                    <div style="height:900px;">内容，测试</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var menuData = [
+            {
+                id:'nav0',
+                title: '导航一',
+                items: [
+                    {
+                        id: 'docTip',
+                        title: '文档',
+                        url: 'dos.html'
+                    },
+                    {
+                        title: '二级导航',
+                        items: [
+                            {
+                                id: 'test0',
+                                title: '测试页面一',
+                                url: 'test/test1.html'
+                            },
+                            {
+                                id: 'test1',
+                                title: '测试页面二',
+                                url: 'test/test2.html'
+                            }
+
+                        ]
+                    }
+                ]
+            },
+            {
+                id:'nav1',
+                title: '导航二',
+                items: [
+                    {
+                        id: 'test2',
+                        title: '测试页面三',
+                        url: 'test/test3.html'
+                    },
+                    {
+                        title: '二级导航',
+                        items: [{
+                            id: 'test3',
+                            title: '测试页面四',
+                            url: 'test/test4.html'
+                        }]
+                    }]
+            },
+            {
+                id:'nav2',
+                title: '导航三',
+                items: [
+                    {
+                        id: 'test4',
+                        title: '测试页面五',
+                        url: 'test/test5.html'
+                    },
+                    {
+                        title: '二级导航',
+                        items: [{
+                            id: 'test5',
+                            title: '测试页面六',
+                            url: 'test/test6.html'
+                        }]
+                    }]
+            }
+        ];
+
+        //调用
+        var d = $.artTabs({
+            id: 'tabCms',
+            data: menuData
+        });
+    });
+
+</script>
+</body>
+</html>
