@@ -99,8 +99,9 @@ import '../css/tabcms.css';
 
             //导航效果
             if (_li.has('ul')) {
-                _li.off('click.li').on('click.li', function () {
-                    $(this).toggleClass('open').children('ul').slideToggle(200);
+                _li.off('click.li').on('click.li', function (e) {
+                    e.stopPropagation();
+                    $(this).toggleClass('eopen').children('ul').slideToggle(200);
                 });
             }
 
@@ -144,7 +145,8 @@ import '../css/tabcms.css';
         _closeBox: function () {
             var that = this;
 
-            that.config.$tabList.off('click.closeTab').on('click.closeTab', 'a.m-tab-close', function () {
+            that.config.$tabList.off('click.closeTab').on('click.closeTab', 'a.m-tab-close', function (e) {
+                e.stopPropagation();
                 var listId = $(this).closest('li').attr('id');
                 var i = listId.indexOf('list');
                 var tabId = listId.substring(0, i);
@@ -152,7 +154,6 @@ import '../css/tabcms.css';
                 artTabs.idArray.splice(j, 1);
                 if ($(this).closest('li').hasClass('on')) {
                     that._prevShow(tabId);
-                    that._removeTab(tabId);
                 } else {
                     that._removeTab(tabId);
                 }
@@ -251,7 +252,6 @@ import '../css/tabcms.css';
                     var j = jQuery.inArray(tabId, artTabs.idArray);
                     artTabs.idArray.splice(j, 1);
                     that._prevShow(tabId);
-                    that._removeTab(tabId);
                     $contextmenu.hide();
                 });
 
@@ -262,6 +262,8 @@ import '../css/tabcms.css';
                     that.config.$tabList.find('li:first').addClass('on');
                     that.config.$tabCon.children('div:first').show();
                     artTabs.idArray = [];
+                    $('.m-nav-sub').find('li').removeClass('active');
+                    that.config.$tabList.children('ul').css({"left":0});
                     $contextmenu.hide();
                 });
 
@@ -370,8 +372,14 @@ import '../css/tabcms.css';
             return that;
         },
         _prevShow: function (tabId) {
+            var _prevListId = $('#' + tabId + 'list', top.document).prev().attr('id');
+            var i = _prevListId.indexOf('list');
+            var _prevId = _prevListId.substring(0, i);
             $('#' + tabId + 'list', top.document).prev().addClass('on');
             $('#' + tabId + 'Con', top.document).prev().show();
+            $('.m-nav-sub').find('li').removeClass('active');
+            $('#' + _prevId).closest('li').addClass('active');
+            this._removeTab(tabId);
             return this;
         },
         _removeTab: function (tabId) {

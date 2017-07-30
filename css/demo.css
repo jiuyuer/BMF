@@ -71,32 +71,11 @@ body {
     display: block;
 }
 
-.demo-con > ul {
+.demo-con>ul {
     padding-left: 15px;
 }
 
-.demo-con > ul > li {
+.demo-con>ul>li {
     list-style: none;
     margin-bottom: 2px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
